@@ -24,7 +24,7 @@ public class RedisSubscriber implements MessageListener {
             String publishMessage = (String) redisTemplate.getStringSerializer().deserialize(message.getBody());
             Data data = objectMapper.readValue(publishMessage, Data.class);
             System.out.println(data.getKey() + ": " + data.getValue());
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
