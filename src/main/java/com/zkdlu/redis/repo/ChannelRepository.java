@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-public class RedisRepository {
+public class ChannelRepository {
     private final RedisMessageListenerContainer redisMessageListener;
     private final RedisSubscriber redisSubscriber;
     private final RedisTemplate<String, Object> redisTemplate;
@@ -20,7 +20,7 @@ public class RedisRepository {
     private Map<String, ChannelTopic> topics;
     private ValueOperations<String, Object> opsValue;
 
-    public RedisRepository(RedisSubscriber redisSubscriber, RedisTemplate<String, Object> redisTemplate, RedisMessageListenerContainer redisMessageListener) {
+    public ChannelRepository(RedisSubscriber redisSubscriber, RedisTemplate<String, Object> redisTemplate, RedisMessageListenerContainer redisMessageListener) {
         this.redisSubscriber = redisSubscriber;
         this.redisTemplate = redisTemplate;
         this.redisMessageListener = redisMessageListener;
@@ -47,5 +47,9 @@ public class RedisRepository {
         topics.put(channel, topic);
 
         return topic;
+    }
+
+    public String getValue(String key) {
+        return (String) opsValue.get(key);
     }
 }
