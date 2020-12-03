@@ -31,3 +31,17 @@ get {key}
    > @RedisHash로 모델 클래스가 Redis에 적재될 때 인자를 키로 해당 인스턴스 값을 적재 함
 
 ### Redis Cache 
+- application.properties
+```application.properties
+spring.cache.type=redis
+```
+- Main Class에 @EnableChaching 어노테이션 추가
+```java
+@EnableCaching
+@SpringBootApplication
+.. 중략
+```
+
+- 다른 어노테이션들
+> @Cacheble @CachePut @CacheEvict
+
