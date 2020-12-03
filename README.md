@@ -23,3 +23,7 @@ set {key} {value}
 ```
 get {key}
 ```
+
+### Spring에서 Redis를 이용하는 방법
+1. StringRedisTemplate, RedisTemplate 사용하기
+2. CrudRepository 사용하기
