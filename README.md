@@ -41,9 +41,36 @@ dependencies {
    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 }
 ```
-1. StringRedisTemplate, RedisTemplate 사용하기
+
+2. Redis Config
+```java
+@Configuration
+public class RedisConfig {
+    @Bean
+    public RedisMessageListenerContainer redisMessageListener(
+            RedisConnectionFactory connectionFactory) {
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory);
+
+        return container;
+    }
+
+    @Bean
+    public RedisTemplate<String, Object> redisTemplate(
+            RedisConnectionFactory connectionFactory) {
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(connectionFactory);
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(String.class));
+
+        return redisTemplate;
+    }
+}
+```
+
+3. StringRedisTemplate, RedisTemplate 사용하기
    > opsForValue를 통해서 레디스에 Key-Value 기반인 데이터를 캐싱하거나 그 값을 얻어올 수 있음
-2. CrudRepository 사용하기
+4. CrudRepository 사용하기
    > @RedisHash로 모델 클래스가 Redis에 적재될 때 인자를 키로 해당 인스턴스 값을 적재 함
 
 ## Redis는 캐시로도 사용된다.
