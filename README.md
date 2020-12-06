@@ -119,3 +119,18 @@ public class CacheConfig {
     }
 }
 ```
+
+4. 사용하기
+```java
+    static int counter = 0;
+
+    @Cacheable(key = "#count", value = "getCache")
+    @GetMapping("/cache")
+    public String getCache(String count) {
+        counter++;
+        return counter + "";
+    }
+```
+> http://localhost:8080/cache?count=1로 요청을 보내도 처음 이후에는 counter값이 증가하지않음
+
+## Redis Cluster??
