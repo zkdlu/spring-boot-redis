@@ -134,6 +134,6 @@ public class CacheConfig {
 > http://localhost:8080/cache?count=1로 요청을 보내도 처음 이후에는 counter값이 증가하지않음
 > - 캐시 등록(없으면) @Cacheable
 > - 캐시 등록(무조건) @CachePut
-> - 캐시 삭제 @Cacheable
+> - 캐시 삭제 @CacheEvict
 
 ## Redis Cluster??
