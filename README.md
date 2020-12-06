@@ -94,3 +94,28 @@ spring.redis.port=6379
 @SpringBootApplication
 .. 중략
 ```
+
+3. Cache Config 설정
+```java
+@Configuration
+public class CacheConfig {
+    @Autowired
+    RedisConnectionFactory redisConnectionFactory;
+
+    @Autowired
+    ObjectMapper objectMapper;
+
+    @Autowired
+    RedisConnectionFactory connectionFactory;
+
+    @Bean
+    public CacheManager redisCacheManager() {
+        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+
+        RedisCacheManager redisCacheManager = RedisCacheManager.RedisCacheManagerBuilder.fromConnectionFactory(connectionFactory).cacheDefaults(redisCacheConfiguration).build();
+        return redisCacheManager;
+    }
+}
+```
