@@ -24,6 +24,16 @@ set {key} {value}
 get {key}
 ```
 
+- Sub (구독)
+```
+subscribe [channel] // 여러 채널 구독 가능
+```
+
+- PUB (게시)
+```
+publish {channel} {message}
+```
+
 ### Spring에서 Redis를 이용하는 방법
 1. 의존성 추가
 ```build.gradle
