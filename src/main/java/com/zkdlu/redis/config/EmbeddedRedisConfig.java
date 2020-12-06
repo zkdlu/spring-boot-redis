@@ -18,8 +18,6 @@ public class EmbeddedRedisConfig {
 
     @PostConstruct
     public void redisServer() {
-        System.out.println(redisPort);
-
         redisServer = new RedisServer(redisPort);
         redisServer.start();
     }
