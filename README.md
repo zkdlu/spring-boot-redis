@@ -34,6 +34,12 @@ subscribe [channel] // 여러 채널 구독 가능
 publish {channel} {message}
 ```
 
+- channel 목록
+```
+pubsub channels
+pubsub channels *
+```
+
 ### Spring에서 Redis를 이용하는 방법
 1. 의존성 추가
 ```build.gradle
