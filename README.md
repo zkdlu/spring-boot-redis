@@ -74,6 +74,31 @@ public class RedisConfig {
 }
 ```
 
+2.1. 내장 Redis 사용
+```java
+@Profile("local")
+@Configuration
+public class EmbeddedRedisConfig {
+    @Value("${spring.redis.port}")
+    private int redisPort;
+
+    private RedisServer redisServer;
+
+    @PostConstruct
+    public void redisServer() {
+        redisServer = new RedisServer(redisPort);
+        redisServer.start();
+    }
+
+    @PreDestroy
+    public void stopRedis() {
+        if (redisServer != null) {
+            redisServer.stop();
+        }
+    }
+}
+```
+
 3. StringRedisTemplate, RedisTemplate 사용하기
    > opsForValue를 통해서 레디스에 Key-Value 기반인 데이터를 캐싱하거나 그 값을 얻어올 수 있음
 4. CrudRepository 사용하기
